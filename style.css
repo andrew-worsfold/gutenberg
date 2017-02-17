@@ -84,15 +84,20 @@ img {
 	/* replaces some block margins */
 }
 
-h1:hover,
-h2:hover,
-h3:hover,
-h4:hover,
-h5:hover,
-h6:hover,
-p:hover,
-blockquote:hover,
-img:hover {
+.block-container {
+    margin-left: -50px;
+    padding-left: 50px;
+}
+
+.block-container:hover h1,
+.block-container:hover h2,
+.block-container:hover h3,
+.block-container:hover h4,
+.block-container:hover h5,
+.block-container:hover h6,
+.block-container:hover p,
+.block-container:hover blockquote,
+.block-container:hover img {
 	box-shadow: inset 0px 0px 0px 2px #e0e5e9;
 }
 
@@ -252,6 +257,12 @@ img.is-selected {
     display: none;
     transform: translateZ( 0 );
  }
+
+.block-container:hover .block-switcher,
+.block-container:hover .switch-block__menu {
+	display: block;
+	opacity: 1;
+}
 
 .block-controls button {
  	background: #191e23;
