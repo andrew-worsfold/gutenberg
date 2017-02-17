@@ -34,6 +34,11 @@ var config = {
 		'image': [ 'image' ],
 		'paragraph': [ 'text' ],
 		'default': []
+	},
+	typeToTag: {
+		paragraph: 'p',
+		quote: 'blockquote',
+		heading: 'h2'
 	}
 };
 
@@ -206,23 +211,17 @@ function attachControlActions() {
 }
 
 function attachTypeSwitcherActions() {
-	var typeToTag = {
-		paragraph: 'p',
-		quote: 'blockquote',
-		heading: 'h2'
-	};
-
 	switcherButtons.forEach( function( button ) {
 		button.addEventListener( 'click', showSwitcherMenu, false );
 	} );
 
-	Object.keys( typeToTag ).forEach( function( type ) {
+	Object.keys( config.typeToTag ).forEach( function( type ) {
 		var selector = '.switch-block__block .type-icon-' + type;
 		var button = queryFirst( selector );
 		var label = queryFirst( selector + ' + label' );
 
-		button.addEventListener( 'click', switchBlockType, false );
-		label.addEventListener( 'click', switchBlockType, false );
+		bind( 'click', button, switchBlockType );
+		bind( 'click', label, switchBlockType );
 
 		function switchBlockType( event ) {
 			if ( ! selectedBlock ) {
@@ -231,7 +230,7 @@ function attachTypeSwitcherActions() {
 
 			var openingRe = /^<\w+/;
 			var closingRe = /\w+>$/;
-			var tag = typeToTag[ type ];
+			var tag = config.typeToTag[ type ];
 			selectedBlock.outerHTML = selectedBlock.outerHTML
 				.replace( openingRe, '<' + tag )
 				.replace( closingRe, tag + '>' );
