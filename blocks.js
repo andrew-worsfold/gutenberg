@@ -83,8 +83,6 @@ attachTypeSwitcherActions();
 function attachBlockHandlers() {
 	getBlocks().forEach( function( block ) {
 		bind( 'click', block, selectBlock );
-		bind( 'mouseenter', block, focusBlock );
-		bind( 'mouseleave', block, blurBlock );
 	} );
 }
 
@@ -100,16 +98,6 @@ function selectBlock( event ) {
 
 	selectedBlock = event.target;
 	showControls( selectedBlock );
-}
-
-function focusBlock( event ) {
-	if ( selectedBlock ) return;
-	showControls( event.target );
-}
-
-function blurBlock( event ) {
-	if ( selectedBlock ) return;
-	clearBlocks();
 }
 
 function clearBlocks() {
